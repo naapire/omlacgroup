@@ -5,28 +5,29 @@ const TestimonialData = [
   {
     id: 1,
     name: "Victor",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque reiciendis inventore iste ratione ex alias quis magni at optio",
+    text: "Omlac made it so easy to order products from China. The process was smooth and my goods arrived in perfect condition.",
     img: "https://picsum.photos/101/101",
   },
   {
     id: 2,
-    name: "Satya Nadella",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque reiciendis inventore iste ratione ex alias quis magni at optio",
+    name: "Nana Kwame",
+    text: "Excellent service! Fast delivery, great packaging, and the quality of the items exceeded my expectations.",
     img: "https://picsum.photos/102/102",
   },
   {
     id: 3,
-    name: "Virat Kohli",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque reiciendis inventore iste ratione ex alias quis magni at optio",
+    name: "Mavis Kuusori",
+    text: "I was able to send a custom order outside the listed products and they delivered just as promised. Highly reliable!",
     img: "https://picsum.photos/104/104",
   },
   {
     id: 5,
-    name: "Sachin Tendulkar",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque reiciendis inventore iste ratione ex alias quis magni at optio",
+    name: "Vida KoKoi",
+    text: "I’ve used several importers, but Omlac is by far the most efficient. The team is responsive and trustworthy.",
     img: "https://picsum.photos/103/103",
   },
 ];
+
 
 const Testimonials = () => {
   var settings = {
