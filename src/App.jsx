@@ -17,6 +17,7 @@ import Beauty from "./components/beauty/beauty";
 import HomeAppliance from "./components/HomeAppliance/homeAppliance";
 import Fashion from "./components/fashion/fashion";
 import Electronics from "./components/electronics/electronic";
+import Customerization from "./components/customerisation/customerisation";
 
 const App = () => {
   const [orderPopup, setOrderPopup] = React.useState(false);
@@ -82,6 +83,10 @@ const App = () => {
           <Route
             path="/electronics"
             element={<Electronics handleOrderPopup={handleOrderPopup} searchQuery={searchQuery} />}
+          />
+          <Route
+            path="/customeriZation"
+            element={<Customerization handleOrderPopup={handleOrderPopup} searchQuery={searchQuery} />}
           />
         </Routes>
 

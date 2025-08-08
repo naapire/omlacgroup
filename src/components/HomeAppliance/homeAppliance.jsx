@@ -38,7 +38,7 @@ export default function HomeAppliance({ handleOrderPopup, searchQuery }) {
   return (
     <div className="min-h-screen py-10 bg-white dark:bg-gray-900 dark:text-white">
       <div className="container mt-10">
-        <h2 className="text-3xl font-bold text-center mb-6">Home Appliances</h2>
+        <h2 className="text-3xl font-bold text-center mb-6">Affordable Home Appliances</h2>
 
         {filteredAppliances.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-4 sm:px-0">

@@ -15,7 +15,7 @@ import elec9 from './../../assets/elect/elec9.jpg';
 
 // Electronics product data
 const electronicData = [
-  { img: elec1, title: "Laptops" },
+  { img: elec1, title: "Refrigerator" },
   { img: elec2, title: "Iphones" },
   { img: elec3, title: "Smart Phones" },
   { img: elec4, title: "Toasters" },
@@ -38,7 +38,7 @@ export default function Electronic({ handleOrderPopup, searchQuery }) {
       <div className="container mx-auto">
         {/* Heading */}
         <div className="text-center mb-10">
-          <h2 className="text-4xl font-bold mb-2">Electronics</h2>
+          <h2 className="text-4xl font-bold mb-2">Quality Electronics</h2>
           <p className="text-sm text-gray-500 dark:text-gray-400">
             Quality electronics at wholesale prices
           </p>

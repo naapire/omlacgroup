@@ -12,6 +12,7 @@ const Menu = [
   { id: 3, name: "Fashion & Wearables", link: "/fashion" },
   { id: 4, name: "Toys & Kids Items", link: "/kids" },
   { id: 5, name: "Health & Beauty", link: "/beauty" },
+  { id: 6, name: "Customerization", link: "/customerization" },
 ];
 
 const Navbar = ({ handleOrderPopup, onSearch }) => {
