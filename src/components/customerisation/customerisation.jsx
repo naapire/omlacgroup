@@ -66,14 +66,14 @@ const Customerization = () => {
         <div className="flex flex-col md:flex-row justify-center gap-4">
           <button
             onClick={handleWhatsApp}
-            className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg text-lg"
+            className=" bg-primary text-white px-6 py-3 rounded-lg shadow-lg text-lg"
           >
             📱 Chat with Us on WhatsApp
           </button>
 
           <button
             onClick={handleEmail}
-            className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg shadow-lg text-lg"
+            className=" bg-primary  text-white px-6 py-3 rounded-lg shadow-lg text-lg"
           >
             📧 Send Us an Email
           </button>
