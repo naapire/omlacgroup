@@ -19,7 +19,7 @@ const Popup = ({ orderPopup, setOrderPopup }) => {
     }));
   };
 
-  const handleSendToWhatsApp = () => {
+  const handleSendToEmail = () => {
     const { name, email, address, item, quantity, contact } = formData;
 
     if (!name || !address || !item || !quantity || !contact) {
@@ -27,12 +27,26 @@ const Popup = ({ orderPopup, setOrderPopup }) => {
       return;
     }
 
-    const whatsappNumber = "233556393391";
+    const recipientEmail = "vidanaapire@gmail.com";
+    const subject = encodeURIComponent("New Custom Order Request");
 
-    const message = `Hello Omlac Team,%0A%0AI would like to place an order:%0A- Name: ${name}%0A- Email: ${email || "Not provided"}%0A- Address: ${address}%0A- Item: ${item}%0A- Quantity: ${quantity}%0A- My WhatsApp/Contact: ${contact}%0A%0AThank you.`;
+    const body = encodeURIComponent(
+      `Hello Omlac Team,
 
-    const url = `https://wa.me/${whatsappNumber}?text=${message}`;
-    window.open(url, "_blank");
+I would like to place an order:
+
+- Name: ${name}
+- Email: ${email || "Not provided"}
+- Address: ${address}
+- Item: ${item}
+- Quantity: ${quantity}
+- My WhatsApp/Contact: ${contact}
+
+Thank you.`
+    );
+
+    // Open default email client
+    window.location.href = `mailto:${recipientEmail}?subject=${subject}&body=${body}`;
 
     // Reset form and close popup
     setFormData({
@@ -119,10 +133,10 @@ const Popup = ({ orderPopup, setOrderPopup }) => {
 
                 <div className="flex justify-center mt-2">
                   <button
-                    onClick={handleSendToWhatsApp}
+                    onClick={handleSendToEmail}
                     className="bg-gradient-to-r from-primary to-secondary hover:scale-105 duration-200 text-white py-1 px-4 rounded-full"
                   >
-                    Send to WhatsApp
+                    Send to Email
                   </button>
                 </div>
               </div>

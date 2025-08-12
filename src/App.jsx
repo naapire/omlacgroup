@@ -53,8 +53,8 @@ const App = () => {
             path="/"
             element={
               <>
-                <Hero handleOrderPopup={handleOrderPopup} />
-                <Products searchQuery={searchQuery} />
+                <Hero  handleOrderPopup={handleOrderPopup} searchQuery={searchQuery} />
+                <Products  handleOrderPopup={handleOrderPopup} searchQuery={searchQuery} />
                 <Banner />
                 <Subscribe />
                 <Products handleOrderPopup={handleOrderPopup} searchQuery={searchQuery} />
