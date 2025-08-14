@@ -10,6 +10,8 @@ const Popup = ({ orderPopup, setOrderPopup }) => {
     quantity: "",
     contact: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -19,7 +21,9 @@ const Popup = ({ orderPopup, setOrderPopup }) => {
     }));
   };
 
-  const handleSendToEmail = () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
     const { name, email, address, item, quantity, contact } = formData;
 
     if (!name || !address || !item || !quantity || !contact) {
@@ -27,28 +31,78 @@ const Popup = ({ orderPopup, setOrderPopup }) => {
       return;
     }
 
-    const recipientEmail = "vidanaapire@gmail.com";
-    const subject = encodeURIComponent("New Custom Order Request");
+    setIsSubmitting(true);
+    setSubmitStatus("");
 
-    const body = encodeURIComponent(
-      `Hello Omlac Team,
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          access_key: "9eade46e-1397-4e56-a8ea-c718cd5b60f6",
+          name: name,
+          email: email || "customer@omlac.com",
+          address: address,
+          item: item,
+          quantity: quantity,
+          contact: contact,
+          subject: `New Order Request - ${item}`,
+          message: `New order request from ${name} for ${quantity} units of ${item}. Contact: ${contact}. Address: ${address}`,
+          replyto: email || "customer@omlac.com",
+        }),
+      });
 
-I would like to place an order:
+      const result = await response.json();
 
-- Name: ${name}
-- Email: ${email || "Not provided"}
-- Address: ${address}
-- Item: ${item}
-- Quantity: ${quantity}
-- My WhatsApp/Contact: ${contact}
+      if (result.success) {
+        setSubmitStatus("success");
+        console.log("✅ Email sent successfully via Web3Forms");
 
-Thank you.`
-    );
+        const orderDetails = {
+          id: Date.now(),
+          timestamp: new Date().toISOString(),
+          customer: { name, email: email || "Not provided", address, contact },
+          order: { item, quantity: parseInt(quantity) },
+          status: "Email Sent",
+        };
+        console.log("🎯 ORDER DETAILS:", orderDetails);
 
-    // Open default email client
-    window.location.href = `mailto:${recipientEmail}?subject=${subject}&body=${body}`;
+        setTimeout(() => {
+          setFormData({
+            name: "",
+            email: "",
+            address: "",
+            item: "",
+            quantity: "",
+            contact: "",
+          });
+          setOrderPopup(false);
+          setSubmitStatus("");
+        }, 4000);
+      } else {
+        throw new Error("Failed to send email");
+      }
+    } catch (error) {
+      console.error("Error sending order:", error);
+      setSubmitStatus("error");
+      console.log("📧 ORDER DETAILS (manual processing):", {
+        name,
+        email: email || "Not provided",
+        address,
+        item,
+        quantity,
+        contact,
+        timestamp: new Date().toISOString(),
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
-    // Reset form and close popup
+  const handleClose = () => {
+    setOrderPopup(false);
     setFormData({
       name: "",
       email: "",
@@ -57,7 +111,7 @@ Thank you.`
       quantity: "",
       contact: "",
     });
-    setOrderPopup(false);
+    setSubmitStatus("");
   };
 
   return (
@@ -71,12 +125,36 @@ Thank you.`
                 <h1 className="text-lg font-bold">Order Now</h1>
                 <IoCloseOutline
                   className="text-2xl cursor-pointer"
-                  onClick={() => setOrderPopup(false)}
+                  onClick={handleClose}
                 />
               </div>
 
+              {/* Status messages */}
+              {submitStatus === "success" && (
+                <div className="mb-4 p-3 bg-green-100 border border-green-400 text-green-700 rounded-md">
+                  <div className="font-bold">✅ Order Submitted Successfully!</div>
+                  <div className="text-sm mt-1">
+                    We've received your order and will contact you soon.
+                    <br />
+                    <span className="text-xs text-gray-600">
+                      {formData.item
+                        ? `Order: ${formData.item} x${formData.quantity}`
+                        : ""}
+                      <br />
+                      📧 Email sent to info@omlacgroup.com
+                    </span>
+                  </div>
+                </div>
+              )}
+
+              {submitStatus === "error" && (
+                <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-md">
+                  ❌ Error sending order. Please try again or contact us directly.
+                </div>
+              )}
+
               {/* form */}
-              <div className="grid gap-3">
+              <form onSubmit={handleSubmit} className="grid gap-3">
                 <input
                   type="text"
                   name="name"
@@ -85,6 +163,7 @@ Thank you.`
                   placeholder="Full Name"
                   className="w-full rounded-full border border-gray-300 dark:border-gray-500 dark:bg-gray-800 px-3 py-1"
                   required
+                  disabled={isSubmitting}
                 />
                 <input
                   type="email"
@@ -93,6 +172,7 @@ Thank you.`
                   onChange={handleChange}
                   placeholder="Email (optional)"
                   className="w-full rounded-full border border-gray-300 dark:border-gray-500 dark:bg-gray-800 px-3 py-1"
+                  disabled={isSubmitting}
                 />
                 <input
                   type="text"
@@ -102,6 +182,7 @@ Thank you.`
                   placeholder="Delivery Address"
                   className="w-full rounded-full border border-gray-300 dark:border-gray-500 dark:bg-gray-800 px-3 py-1"
                   required
+                  disabled={isSubmitting}
                 />
                 <input
                   type="text"
@@ -111,6 +192,7 @@ Thank you.`
                   placeholder="Item Name"
                   className="w-full rounded-full border border-gray-300 dark:border-gray-500 dark:bg-gray-800 px-3 py-1"
                   required
+                  disabled={isSubmitting}
                 />
                 <input
                   type="number"
@@ -120,6 +202,7 @@ Thank you.`
                   placeholder="Quantity"
                   className="w-full rounded-full border border-gray-300 dark:border-gray-500 dark:bg-gray-800 px-3 py-1"
                   required
+                  disabled={isSubmitting}
                 />
                 <input
                   type="tel"
@@ -129,17 +212,19 @@ Thank you.`
                   placeholder="Your WhatsApp / Phone Number"
                   className="w-full rounded-full border border-gray-300 dark:border-gray-500 dark:bg-gray-800 px-3 py-1"
                   required
+                  disabled={isSubmitting}
                 />
 
                 <div className="flex justify-center mt-2">
                   <button
-                    onClick={handleSendToEmail}
-                    className="bg-gradient-to-r from-primary to-secondary hover:scale-105 duration-200 text-white py-1 px-4 rounded-full"
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="bg-gradient-to-r from-primary to-secondary hover:scale-105 duration-200 text-white py-1 px-4 rounded-full disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    Send to Email
+                    {isSubmitting ? "Sending..." : "Submit Order"}
                   </button>
                 </div>
-              </div>
+              </form>
             </div>
           </div>
         </div>

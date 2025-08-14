@@ -4,17 +4,13 @@ import Sample2 from './../../assets/website/customer2.jpg';
 import Sample3 from './../../assets/website/customer3.jpg';
 import Sample from './../../assets/website/banner2.jpg';
 
-const Customerization = () => {
+export default function Customerization({ handleOrderPopup }) {
   const whatsappNumber = "233556393391"; // Change to your WhatsApp number
   const emailAddress = "comfortnaapire@email.com"; // Change to your email
 
   const handleWhatsApp = () => {
     const message = "Hello! I would like to request a custom design.";
     window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, "_blank");
-  };
-
-  const handleEmail = () => {
-    window.location.href = `mailto:${emailAddress}?subject=Custom Design Request&body=Hello! I would like to request a custom design.`;
   };
 
   return (
@@ -81,15 +77,13 @@ const Customerization = () => {
           </button>
 
           <button
-            onClick={handleEmail}
+            onClick={handleOrderPopup}
             className="bg-primary text-white px-6 py-3 rounded-lg shadow-lg text-lg"
           >
-            📧 Send Us an Email
+            🛒 Order Now
           </button>
         </div>
       </section>
     </div>
   );
-};
-
-export default Customerization;
+}
