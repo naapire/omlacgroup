@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../assets/logo.jpg";
-import { IoMdSearch } from "react-icons/io";
 import { FaCartShopping } from "react-icons/fa6";
 import { FaBars, FaTimes } from "react-icons/fa";
 import DarkMode from "./DarkMode";
@@ -15,23 +14,8 @@ const Menu = [
   { id: 6, name: "Customization and Branding", link: "/customerization" },
 ];
 
-const Navbar = ({ handleOrderPopup, onSearch }) => {
+const Navbar = ({ handleOrderPopup }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
-
-  const handleSearch = (e) => {
-    const value = e.target.value;
-    setSearchTerm(value);
-    if (onSearch) {
-      onSearch(value); // Send search term to parent
-    }
-  };
-
-  const handleSearchEnter = (e) => {
-    if (e.key === "Enter") {
-      console.log("Searched for:", searchTerm);
-    }
-  };
 
   return (
     <div className="shadow-md bg-white dark:bg-gray-900 dark:text-white duration-200 relative z-40">
@@ -60,21 +44,8 @@ const Navbar = ({ handleOrderPopup, onSearch }) => {
             {isOpen ? <FaTimes /> : <FaBars />}
           </button>
 
-          {/* Search and Actions */}
+          {/* Order Button + Dark Mode */}
           <div className="flex items-center gap-4 mt-2 sm:mt-0">
-            {/* Search */}
-            <div className="relative group hidden sm:block">
-              <input
-                type="text"
-                value={searchTerm}
-                onChange={handleSearch}
-                onKeyDown={handleSearchEnter}
-                placeholder="Search"
-                className="w-[200px] group-hover:w-[300px] transition-all duration-300 rounded-full border border-gray-300 px-2 py-1 focus:outline-none focus:border-primary dark:border-gray-500 dark:bg-gray-800"
-              />
-              <IoMdSearch className="text-gray-500 group-hover:text-primary absolute top-1/2 -translate-y-1/2 right-3" />
-            </div>
-
             {/* Order Button */}
             <button
               onClick={handleOrderPopup}

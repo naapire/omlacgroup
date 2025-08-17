@@ -61,23 +61,36 @@ const Footer = () => {
             </div>
 
             {/* Social Links */}
-            <div className="py-8 px-4">
-              <div className="flex items-center gap-3 mt-6">
-                <a href="#"><FaInstagram className="text-3xl" /></a>
-                <a href="#"><FaFacebook className="text-3xl" /></a>
-                <a href="#"><FaLinkedin className="text-3xl" /></a>
-              </div>
-              <div className="mt-6">
-                <div className="flex items-center gap-3">
-                  <FaLocationArrow />
-                  <p>Ghana</p>
-                </div>
-                <div className="flex items-center gap-3 mt-3">
-                  <FaMobileAlt />
-                  <p>+233 556393391</p>
-                </div>
-              </div>
-            </div>
+<div className="py-8 px-4">
+  <div className="flex items-center gap-3 mt-6">
+    <a 
+      href="https://www.instagram.com/omlac_supplies/?_pwa=1#" 
+      target="_blank" 
+      rel="noopener noreferrer"
+    >
+      <FaInstagram className="text-3xl" />
+    </a>
+    <a 
+      href="http://web.facebook.com/profile.php?id=61579171751313" 
+      target="_blank" 
+      rel="noopener noreferrer"
+    >
+      <FaFacebook className="text-3xl" />
+    </a>
+   
+  </div>
+  <div className="mt-6">
+    <div className="flex items-center gap-3">
+      <FaLocationArrow />
+      <p>Ghana</p>
+    </div>
+    <div className="flex items-center gap-3 mt-3">
+      <FaMobileAlt />
+      <p>+233 556393391</p>
+    </div>
+  </div>
+</div>
+
           </div>
         </div>
       </div>
