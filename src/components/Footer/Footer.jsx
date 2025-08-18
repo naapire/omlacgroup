@@ -23,6 +23,7 @@ const FooterLinks = [
   { title: "Kids & Toys", link: "/kids" },
   { title: "Fashion & Wearables", link: "/fashion" },
   { title: "Health & Beauty", link: "/beauty" },
+  { title: "Customization and Branding", link: "/customerization" },
 ];
 
 const Footer = () => {
@@ -86,7 +87,7 @@ const Footer = () => {
     </div>
     <div className="flex items-center gap-3 mt-3">
       <FaMobileAlt />
-      <p>+233 556393391</p>
+      <p>+233 554 313 833</p>
     </div>
   </div>
 </div>
